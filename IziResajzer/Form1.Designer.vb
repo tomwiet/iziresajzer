@@ -49,6 +49,7 @@ Partial Class Form1
         Me.lbxFileList.FormattingEnabled = True
         Me.lbxFileList.Location = New System.Drawing.Point(13, 27)
         Me.lbxFileList.Name = "lbxFileList"
+        Me.lbxFileList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lbxFileList.Size = New System.Drawing.Size(259, 69)
         Me.lbxFileList.TabIndex = 1
         '
