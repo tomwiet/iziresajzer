@@ -103,6 +103,7 @@ Partial Class Form1
         Me.ProgressBar.Name = "ProgressBar"
         Me.ProgressBar.Size = New System.Drawing.Size(178, 23)
         Me.ProgressBar.TabIndex = 7
+        Me.ProgressBar.Visible = False
         '
         'lblProgress
         '
@@ -112,6 +113,7 @@ Partial Class Form1
         Me.lblProgress.Size = New System.Drawing.Size(43, 13)
         Me.lblProgress.TabIndex = 8
         Me.lblProgress.Text = "Postęp:"
+        Me.lblProgress.Visible = False
         '
         'OpenFileDialog1
         '
