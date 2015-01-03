@@ -20,7 +20,7 @@
             dgvListFiles.DataSource = dt 'ustaw dt jako źródło danych dla dgv
             dgvListFiles.Columns(0).Visible = False 'ukryj pierwszą kolumne
         End If
-        txtTargetPath.Text = System.IO.Path.GetDirectoryName(OpenFileDialog1.FileName) 'sciezka do katalogu z którego były wybierane pliki
+        txtTargetPath.Text = System.IO.Path.GetDirectoryName(OpenFileDialog1.FileName) & "\resized" 'sciezka do katalogu z którego były wybierane pliki
         'lblTest.Text = dgvListFiles.Rows.Count.ToString() 'kod techniczny, wypisuje liczbe wybranych plików
     End Sub
 
@@ -68,6 +68,15 @@
             NewSize.Width = 640
             NewSize.Height = 480
         End If
+        If (Not System.IO.Directory.Exists(txtTargetPath.Text)) Then
+            Try
+                System.IO.Directory.CreateDirectory(txtTargetPath.Text)
+            Catch ex As Exception
+                MessageBox.Show("ZNie udało się utworzyć katalogu na zmniejszane pliki", "Bład", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+
+        End If
+
         PictureBox.Image = Nothing
         ProgressBar.Minimum = 0
         ProgressBar.Maximum = dgvListFiles.Rows.Count
@@ -78,7 +87,8 @@
             For Each row As DataGridViewRow In dgvListFiles.Rows
                 strPicture = row.Cells(0).Value
                 ResizedImage = New Bitmap(Image.FromFile(strPicture), NewSize)
-                strResizedName = strPicture.Substring(0, strPicture.LastIndexOf(".")) + "_resized" + ".jpg"
+                'strResizedName = strPicture.Substring(0, strPicture.LastIndexOf(".")) + "_resized" + ".jpg"
+                strResizedName = txtTargetPath.Text & "\" & row.Cells(1).Value
                 ResizedImage.Save(strResizedName, System.Drawing.Imaging.ImageFormat.Jpeg)
                 ProgressBar.Value = ProgressBar.Value + 1
                 ResizedImage.Dispose()
