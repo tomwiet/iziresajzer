@@ -68,6 +68,7 @@
             NewSize.Width = 640
             NewSize.Height = 480
         End If
+        'stwórz katalog na zmniejszone pliki
         If (Not System.IO.Directory.Exists(txtTargetPath.Text)) Then
             Try
                 System.IO.Directory.CreateDirectory(txtTargetPath.Text)

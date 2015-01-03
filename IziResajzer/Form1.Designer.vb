@@ -38,6 +38,7 @@ Partial Class Form1
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.dgvListFiles = New System.Windows.Forms.DataGridView()
         Me.lblTest = New System.Windows.Forms.Label()
+        Me.cbxResized = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvListFiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -148,7 +149,7 @@ Partial Class Form1
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(236, 185)
+        Me.btnBrowse.Location = New System.Drawing.Point(225, 183)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(35, 23)
         Me.btnBrowse.TabIndex = 12
@@ -180,11 +181,22 @@ Partial Class Form1
         Me.lblTest.TabIndex = 14
         Me.lblTest.Text = "test"
         '
+        'cbxResized
+        '
+        Me.cbxResized.AutoSize = True
+        Me.cbxResized.Location = New System.Drawing.Point(266, 189)
+        Me.cbxResized.Name = "cbxResized"
+        Me.cbxResized.Size = New System.Drawing.Size(169, 17)
+        Me.cbxResized.TabIndex = 15
+        Me.cbxResized.Text = "Dodaj _resized do nazwy pliku"
+        Me.cbxResized.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 262)
+        Me.Controls.Add(Me.cbxResized)
         Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.dgvListFiles)
         Me.Controls.Add(Me.btnBrowse)
@@ -224,5 +236,6 @@ Partial Class Form1
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents dgvListFiles As System.Windows.Forms.DataGridView
     Friend WithEvents lblTest As System.Windows.Forms.Label
+    Friend WithEvents cbxResized As System.Windows.Forms.CheckBox
 
 End Class
