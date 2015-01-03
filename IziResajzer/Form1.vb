@@ -1,24 +1,31 @@
 ﻿Public Class Form1
 
     Private Sub btnAddFiles_Click(sender As Object, e As EventArgs) Handles btnAddFiles.Click
+        Dim dt As New DataTable 'obiekt typu DataTable do przechowywania ściezki i nazwy pliku
+        dt.Columns.Add(New DataColumn("FilePath")) 'columna przechowująca ściezkę
+        dt.Columns.Add(New DataColumn("FileName")) 'kolumna przechowująca nazw pliku
 
-        Dim strFiles() As String
-        Dim strFile As String
-
+        Dim strFileName As String
+        Dim strFileNames() As String
         'dodaj zaznaczone pliki do lstFiles
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
-            strFiles = OpenFileDialog1.FileNames
-            For Each strFile In strFiles
-                lbxFileList.Items.Add(strFile)
-
+            strFileNames = OpenFileDialog1.FileNames
+            For Each strFileName In strFileNames
+                Dim dr As DataRow = dt.NewRow 'tworzenie nowego wiersza dla dt
+                dr(0) = strFileName
+                Dim tmp() As String = Split(strFileName, "\")
+                dr(1) = tmp(tmp.Length - 1)
+                dt.Rows.Add(dr)
             Next
-
+            dgvListFiles.DataSource = dt
+            dgvListFiles.Columns(0).Visible = False
         End If
+        txtTargetPath.Text = System.IO.Path.GetDirectoryName(OpenFileDialog1.FileName)
+        lblTest.Text = dgvListFiles.Rows.Count.ToString()
     End Sub
 
-
     'wyswietl plik zaznaczony w lstFiles przy pomocy PictureBox
-    Private Sub lbxFileList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbxFileList.SelectedIndexChanged
+    Private Sub lbxFileList_SelectedIndexChanged(sender As Object, e As EventArgs)
         If lbxFileList.SelectedItems.Count > 0 Then 'jesli zaznnaczono minimum jeden plik
 
             Try
@@ -39,9 +46,9 @@
     Private Sub btnZastosuj_Click(sender As Object, e As EventArgs) Handles btnZastosuj.Click
         Dim ResizedImage As Image
         Dim NewSize As New Size
-        Dim strFile As String
+        Dim strPicture As String
         Dim strResizedName As String
-        If lbxFileList.Items.Count < 1 Then
+        If dgvListFiles.Rows.Count < 1 Then
             MessageBox.Show("Nie wybrano plików", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
@@ -63,25 +70,46 @@
         End If
         PictureBox.Image = Nothing
         ProgressBar.Minimum = 0
-        ProgressBar.Maximum = lbxFileList.Items.Count
+        ProgressBar.Maximum = dgvListFiles.Rows.Count
         ProgressBar.Value = 0
         ProgressBar.Visible = True
         Try
-            For Each strFile In lbxFileList.Items
-                ResizedImage = New Bitmap(Image.FromFile(strFile), NewSize)
-                strResizedName = strFile.Substring(0, strFile.LastIndexOf(".")) + "_resized" + ".jpg"
+
+            For Each row As DataGridViewRow In dgvListFiles.Rows
+                strPicture = row.Cells(0).Value
+                ResizedImage = New Bitmap(Image.FromFile(strPicture), NewSize)
+                strResizedName = strPicture.Substring(0, strPicture.LastIndexOf(".")) + "_resized" + ".jpg"
                 ResizedImage.Save(strResizedName, System.Drawing.Imaging.ImageFormat.Jpeg)
                 ProgressBar.Value = ProgressBar.Value + 1
                 ResizedImage.Dispose()
             Next
-            lbxFileList.Items.Clear()
+            'lbxFileList.Items.Clear()
         Catch ex As Exception
             MessageBox.Show("Zapis jednego lub więcej plików nie powiódł się", "Bład", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
+        dgvListFiles.DataSource = Nothing
+        dgvListFiles.Rows.Clear()
+        dgvListFiles.Columns.Clear()
         MessageBox.Show("Zapisano pomyślnie wszystkie pliki", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.None)
         ProgressBar.Visible = False
         lblProgress.Visible = False
+    End Sub
+
+    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+        If FolderBrowserDialog1.ShowDialog = DialogResult.OK Then
+            txtTargetPath.Text = FolderBrowserDialog1.SelectedPath
+        End If
+
+    End Sub
+
+    Private Sub dgvListFiles_SelectionChanged(sender As Object, e As EventArgs) Handles dgvListFiles.SelectionChanged
+        If dgvListFiles.SelectedRows.Count > 0 Then
+            Try
+                PictureBox.Image = Image.FromFile(dgvListFiles.SelectedRows.Item(0).Cells(0).Value)
+            Catch ex As Exception
+                MessageBox.Show("Nie udało się otworzyć pliku", "Błąd oczytu pliku", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
     End Sub
 End Class
 
