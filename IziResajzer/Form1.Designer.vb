@@ -62,7 +62,7 @@ Partial Class Form1
         '
         'btnAddFiles
         '
-        Me.btnAddFiles.Location = New System.Drawing.Point(197, 127)
+        Me.btnAddFiles.Location = New System.Drawing.Point(114, 127)
         Me.btnAddFiles.Name = "btnAddFiles"
         Me.btnAddFiles.Size = New System.Drawing.Size(22, 23)
         Me.btnAddFiles.TabIndex = 3
@@ -71,7 +71,7 @@ Partial Class Form1
         '
         'btnRemoveFiles
         '
-        Me.btnRemoveFiles.Location = New System.Drawing.Point(230, 127)
+        Me.btnRemoveFiles.Location = New System.Drawing.Point(151, 127)
         Me.btnRemoveFiles.Name = "btnRemoveFiles"
         Me.btnRemoveFiles.Size = New System.Drawing.Size(22, 23)
         Me.btnRemoveFiles.TabIndex = 4
@@ -89,9 +89,9 @@ Partial Class Form1
         '
         'PictureBox
         '
-        Me.PictureBox.Location = New System.Drawing.Point(258, 8)
+        Me.PictureBox.Location = New System.Drawing.Point(197, 8)
         Me.PictureBox.Name = "PictureBox"
-        Me.PictureBox.Size = New System.Drawing.Size(176, 142)
+        Me.PictureBox.Size = New System.Drawing.Size(228, 169)
         Me.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox.TabIndex = 6
         Me.PictureBox.TabStop = False
@@ -168,7 +168,7 @@ Partial Class Form1
         Me.dgvListFiles.ReadOnly = True
         Me.dgvListFiles.RowHeadersVisible = False
         Me.dgvListFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvListFiles.Size = New System.Drawing.Size(240, 96)
+        Me.dgvListFiles.Size = New System.Drawing.Size(179, 96)
         Me.dgvListFiles.TabIndex = 13
         '
         'lblTest
