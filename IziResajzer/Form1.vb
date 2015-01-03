@@ -7,21 +7,21 @@
 
         Dim strFileName As String
         Dim strFileNames() As String
-        'dodaj zaznaczone pliki do lstFiles
+        'dodaj zaznaczone pliki do dgvListFiles
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
             strFileNames = OpenFileDialog1.FileNames
             For Each strFileName In strFileNames
                 Dim dr As DataRow = dt.NewRow 'tworzenie nowego wiersza dla dt
-                dr(0) = strFileName
-                Dim tmp() As String = Split(strFileName, "\")
-                dr(1) = tmp(tmp.Length - 1)
-                dt.Rows.Add(dr)
+                dr(0) = strFileName 'pierwsza kolumna - ścieżka dostępu
+                Dim tmp() As String = Split(strFileName, "\") 'podziel
+                dr(1) = tmp(tmp.Length - 1) 'druga kolumna - nazwa pliku
+                dt.Rows.Add(dr) 'dodaj wiersz do dt
             Next
-            dgvListFiles.DataSource = dt
-            dgvListFiles.Columns(0).Visible = False
+            dgvListFiles.DataSource = dt 'ustaw dt jako źródło danych dla dgv
+            dgvListFiles.Columns(0).Visible = False 'ukryj pierwszą kolumne
         End If
-        txtTargetPath.Text = System.IO.Path.GetDirectoryName(OpenFileDialog1.FileName)
-        lblTest.Text = dgvListFiles.Rows.Count.ToString()
+        txtTargetPath.Text = System.IO.Path.GetDirectoryName(OpenFileDialog1.FileName) 'sciezka do katalogu z którego były wybierane pliki
+        'lblTest.Text = dgvListFiles.Rows.Count.ToString() 'kod techniczny, wypisuje liczbe wybranych plików
     End Sub
 
     'wyswietl plik zaznaczony w lstFiles przy pomocy PictureBox
