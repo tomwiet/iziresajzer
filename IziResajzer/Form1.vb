@@ -46,7 +46,7 @@
     Private Sub btnZastosuj_Click(sender As Object, e As EventArgs) Handles btnZastosuj.Click
         Dim ResizedImage As Image
         Dim NewSize As New Size
-        Dim strPicture As String
+        Dim strFileName As String
         Dim strResizedName As String
         If dgvListFiles.Rows.Count < 1 Then
             MessageBox.Show("Nie wybrano plików", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -56,18 +56,10 @@
             MessageBox.Show("Nie wybrano rozmiaru", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
-        If cbxSizes.SelectedIndex = 0 Then
-            NewSize.Width = 1024
-            NewSize.Height = 768
-        End If
-        If cbxSizes.SelectedIndex = 1 Then
-            NewSize.Width = 800
-            NewSize.Height = 600
-        End If
-        If cbxSizes.SelectedIndex = 2 Then
-            NewSize.Width = 640
-            NewSize.Height = 480
-        End If
+        Dim strNewSize() As String = Split(cbxSizes.Text, "x") 'rozdziel na szerokośc i wysokość
+        NewSize.Width = strNewSize(0)
+        NewSize.Height = strNewSize(1)
+       
         'stwórz katalog na zmniejszone pliki
         If (Not System.IO.Directory.Exists(txtTargetPath.Text)) Then
             Try
@@ -86,10 +78,14 @@
         Try
 
             For Each row As DataGridViewRow In dgvListFiles.Rows
-                strPicture = row.Cells(0).Value
-                ResizedImage = New Bitmap(Image.FromFile(strPicture), NewSize)
+                ResizedImage = New Bitmap(Image.FromFile(row.Cells(0).Value), NewSize)
+                strFileName = row.Cells(1).Value
+                If cbxResized.Checked = True Then
+                    Dim tmp() As String = Split(row.Cells(1).Value, ".")
+                    strFileName = tmp(0) & "_resized." & tmp(1)
+                End If
                 'strResizedName = strPicture.Substring(0, strPicture.LastIndexOf(".")) + "_resized" + ".jpg"
-                strResizedName = txtTargetPath.Text & "\" & row.Cells(1).Value
+                strResizedName = txtTargetPath.Text & "\" & strFileName
                 ResizedImage.Save(strResizedName, System.Drawing.Imaging.ImageFormat.Jpeg)
                 ProgressBar.Value = ProgressBar.Value + 1
                 ResizedImage.Dispose()
@@ -122,5 +118,6 @@
             End Try
         End If
     End Sub
+
 End Class
 
