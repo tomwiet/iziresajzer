@@ -80,7 +80,7 @@
             For Each row As DataGridViewRow In dgvListFiles.Rows
                 ResizedImage = New Bitmap(Image.FromFile(row.Cells(0).Value), NewSize)
                 strFileName = row.Cells(1).Value
-                If cbxResized.Checked = True Then
+                If cbxResized.Checked = True Then 'jesli zaznaczono opcje "dodaj resized do nazwy pliku"
                     Dim tmp() As String = Split(row.Cells(1).Value, ".")
                     strFileName = tmp(0) & "_resized." & tmp(1)
                 End If

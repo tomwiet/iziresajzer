@@ -45,7 +45,7 @@ Partial Class Form1
         '
         'btnZastosuj
         '
-        Me.btnZastosuj.Location = New System.Drawing.Point(197, 227)
+        Me.btnZastosuj.Location = New System.Drawing.Point(243, 224)
         Me.btnZastosuj.Name = "btnZastosuj"
         Me.btnZastosuj.Size = New System.Drawing.Size(75, 23)
         Me.btnZastosuj.TabIndex = 0
@@ -90,16 +90,16 @@ Partial Class Form1
         '
         'PictureBox
         '
-        Me.PictureBox.Location = New System.Drawing.Point(197, 8)
+        Me.PictureBox.Location = New System.Drawing.Point(179, 8)
         Me.PictureBox.Name = "PictureBox"
-        Me.PictureBox.Size = New System.Drawing.Size(228, 169)
+        Me.PictureBox.Size = New System.Drawing.Size(264, 169)
         Me.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox.TabIndex = 6
         Me.PictureBox.TabStop = False
         '
         'ProgressBar
         '
-        Me.ProgressBar.Location = New System.Drawing.Point(13, 227)
+        Me.ProgressBar.Location = New System.Drawing.Point(12, 224)
         Me.ProgressBar.Name = "ProgressBar"
         Me.ProgressBar.Size = New System.Drawing.Size(178, 23)
         Me.ProgressBar.TabIndex = 7
@@ -108,7 +108,7 @@ Partial Class Form1
         'lblProgress
         '
         Me.lblProgress.AutoSize = True
-        Me.lblProgress.Location = New System.Drawing.Point(16, 208)
+        Me.lblProgress.Location = New System.Drawing.Point(9, 208)
         Me.lblProgress.Name = "lblProgress"
         Me.lblProgress.Size = New System.Drawing.Size(43, 13)
         Me.lblProgress.TabIndex = 8
@@ -160,6 +160,8 @@ Partial Class Form1
         '
         Me.dgvListFiles.AllowUserToAddRows = False
         Me.dgvListFiles.AllowUserToDeleteRows = False
+        Me.dgvListFiles.AllowUserToResizeColumns = False
+        Me.dgvListFiles.AllowUserToResizeRows = False
         Me.dgvListFiles.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvListFiles.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgvListFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -169,7 +171,7 @@ Partial Class Form1
         Me.dgvListFiles.ReadOnly = True
         Me.dgvListFiles.RowHeadersVisible = False
         Me.dgvListFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvListFiles.Size = New System.Drawing.Size(179, 96)
+        Me.dgvListFiles.Size = New System.Drawing.Size(161, 96)
         Me.dgvListFiles.TabIndex = 13
         '
         'lblTest
@@ -180,22 +182,23 @@ Partial Class Form1
         Me.lblTest.Size = New System.Drawing.Size(24, 13)
         Me.lblTest.TabIndex = 14
         Me.lblTest.Text = "test"
+        Me.lblTest.Visible = False
         '
         'cbxResized
         '
         Me.cbxResized.AutoSize = True
-        Me.cbxResized.Location = New System.Drawing.Point(266, 189)
+        Me.cbxResized.Location = New System.Drawing.Point(279, 188)
         Me.cbxResized.Name = "cbxResized"
-        Me.cbxResized.Size = New System.Drawing.Size(169, 17)
+        Me.cbxResized.Size = New System.Drawing.Size(182, 17)
         Me.cbxResized.TabIndex = 15
-        Me.cbxResized.Text = "Dodaj _resized do nazwy pliku"
+        Me.cbxResized.Text = "Dodaj  ""_resized"" do nazwy pliku"
         Me.cbxResized.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(437, 262)
+        Me.ClientSize = New System.Drawing.Size(473, 262)
         Me.Controls.Add(Me.cbxResized)
         Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.dgvListFiles)
@@ -212,7 +215,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnZastosuj)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "IziResajzer"
         CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvListFiles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
