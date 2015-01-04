@@ -36,11 +36,12 @@
         End If
 
     End Sub
-
+    'usuwanie plików z listy
     Private Sub btnRemoveFiles_Click(sender As Object, e As EventArgs) Handles btnRemoveFiles.Click
-        Do While (lbxFileList.SelectedItems.Count > 0)
-            lbxFileList.Items.Remove(lbxFileList.SelectedItem)
-        Loop
+        Dim dr As DataGridViewRow
+        For Each dr In dgvListFiles.SelectedRows
+            dgvListFiles.Rows.Remove(dr)
+        Next
     End Sub
 
     Private Sub btnZastosuj_Click(sender As Object, e As EventArgs) Handles btnZastosuj.Click
